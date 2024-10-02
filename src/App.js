@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import DataHistory from "./components/DataHistory";
+import SlideOver from "./components/SlideOver";
+import { history } from "./data/data";
 
-function App() {
+export default function App() {
+  const [open, setOpen] = useState(false);
+
+  function handleToggle() {
+    setOpen(!open);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="p-4 font-semibold">
+        <button onClick={handleToggle}>↺ History</button>
+      </div>
+      <SlideOver title="dna_seq_v1 History" open={open} onToggle={handleToggle}>
+        <DataHistory data={history} />
+      </SlideOver>
     </div>
   );
 }
-
-export default App;
